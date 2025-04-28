@@ -1,0 +1,28 @@
+{
+  "name": "medilink-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js",
+    "dev": "nodemon ./index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "csv-parser": "^3.2.0",
+    "dotenv": "^16.5.0",
+    "express": "^4.21.2",
+    "http": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.12.0",
+    "mongoose": "^8.8.4",
+    "node-cron": "^3.0.3",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
