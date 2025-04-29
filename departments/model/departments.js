@@ -6,6 +6,7 @@ const departmentSchema = mongoose.Schema({
     description: {type: String,required: false},
     phone: {type: String,required: true,maxlength:14,unique: true},
    hospital: { type: mongoose.Schema.Types.ObjectId, ref: "Hospital", },
+   admin: { type: mongoose.Schema.Types.ObjectId, ref: "DepartmentAdmin" },
    doctors:[{ type: mongoose.Schema.Types.ObjectId, ref: "Doctor" }]
 });
 

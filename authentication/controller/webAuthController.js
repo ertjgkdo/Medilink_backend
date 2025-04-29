@@ -1,5 +1,4 @@
 const Doctor = require("../../doctors/model/doctors");
-const HospitalAdmin = require("../../admins/model/hospitalAdmin");
 const DepartmentAdmin = require("../../admins/model/departmentAdmin");
 const SuperAdmin = require("../../admins/model/superAdmin");
 const bcrypt = require("bcryptjs");
@@ -18,8 +17,7 @@ exports.portalLogin = async (req, res) => {
     // Check based on role
     if (role === "Doctor") {
       user = await Doctor.findOne({ email }).select("+password");
-    } else if (role === "Hospital Admin") {
-      user = await HospitalAdmin.findOne({ email }).select("+password");
+    
     } else if (role === "Department Admin") {
       user = await DepartmentAdmin.findOne({ email }).select("+password");
     } else if (role === "Super Admin") {

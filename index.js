@@ -18,6 +18,7 @@ const searchRouter = require("./search/routes/search_router");
 const opdRouter = require("./opd/routes/opd_routes");
 const patientRouter = require("./patients/routes/patientRouter");
 const filterRouter = require("./search/routes/filter_routes");
+const superAdminrouter = require("./admins/routes/superAdminRoutes");
 const PORT = process.env.PORT || 3002;
 
 
@@ -40,6 +41,7 @@ app.use("/api/search",searchRouter);
 app.use("/api/opd",opdRouter);
 app.use("/api/patients", patientRouter);
 app.use("/api/filter", filterRouter)
+app.use("/api/superadmin", superAdminrouter);
 //dbconnection
 const DB = process.env.MONGO_URI;
 

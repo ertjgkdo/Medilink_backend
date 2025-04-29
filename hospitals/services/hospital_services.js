@@ -1,7 +1,7 @@
 const Hospital = require("../model/hospitals");
 const hospitalService = {
     async getAllHospitals() {
-      return await Hospital.find().select("-__v");
+      return await Hospital.find().populate("departments").select("-__v");
     },
   
     async getHospitalById(id) {

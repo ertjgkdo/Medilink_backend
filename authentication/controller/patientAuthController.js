@@ -28,7 +28,7 @@ exports.patientSignup = async (req, res) => {
 
     await patient.save();
 
-    const token = generateToken(patient._id);
+    const token = generateToken(patient._id, patient.role);
 
     // Only send selected fields (no password!)
     const responsePatient = {
@@ -41,7 +41,7 @@ exports.patientSignup = async (req, res) => {
       bloodGroup: patient.bloodGroup
     };
 
-    res.status(201).json({ message: "Signup successful", user: responsePatient, token });
+    res.status(201).json({ message: "Signup successful", patient: responsePatient, token });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -61,7 +61,7 @@ exports.patientLogin = async (req, res) => {
 
     // Only send selected fields (no password!)
     const responsePatient = {
-      id: patient._id,
+      _id: patient._id,
       name: patient.name,
       email: patient.email,
       phone: patient.phone,
@@ -70,7 +70,7 @@ exports.patientLogin = async (req, res) => {
       bloodGroup: patient.bloodGroup
     };
 
-    res.status(200).json({ message: "Login successful", user: responsePatient, token });
+    res.status(200).json({ message: "Login successful", patient: responsePatient, token });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
