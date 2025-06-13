@@ -5,7 +5,7 @@ const createHospitalWithDepartments = async (req, res) => {
     const hospital = await superAdminService(req.body);
 
     res.status(201).json({
-      message: "Hospital, Departments and Admins created successfully",
+      message: "Hospital created successfully",
       hospital
     });
   } catch (error) {
@@ -17,3 +17,4 @@ const createHospitalWithDepartments = async (req, res) => {
 module.exports = {
   createHospitalWithDepartments
 };
+

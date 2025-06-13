@@ -3,6 +3,7 @@ const e = require("express");
 require("./appointments/services/slot_service");
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require('cors');
 const patientAuthRouter = require("./authentication/routes/patientAuthRouter");
 const commonAuthRouter = require("./authentication/routes/commonAuthRouter");
 const portalAuthRouter = require("./authentication/routes/portalAuthRouter");
@@ -19,10 +20,28 @@ const opdRouter = require("./opd/routes/opd_routes");
 const patientRouter = require("./patients/routes/patientRouter");
 const filterRouter = require("./search/routes/filter_routes");
 const superAdminrouter = require("./admins/routes/superAdminRoutes");
+const depAdminRouter = require("./admins/routes/depAdminRoutes");
 const PORT = process.env.PORT || 3002;
 
 
 const app = express();
+app.use(cors({
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if(!origin) return callback(null, true);
+    
+    // Allow any localhost port
+    if(origin.match(/^http:\/\/localhost:[0-9]+$/)) {
+      return callback(null, true);
+    }
+    
+    callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+}));
+
 //convert data into json and sends to server
 app.use(express.json());
 //middleware
@@ -42,6 +61,7 @@ app.use("/api/opd",opdRouter);
 app.use("/api/patients", patientRouter);
 app.use("/api/filter", filterRouter)
 app.use("/api/superadmin", superAdminrouter);
+app.use("/api/depadmin", depAdminRouter);
 //dbconnection
 const DB = process.env.MONGO_URI;
 

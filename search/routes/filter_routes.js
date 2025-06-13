@@ -6,11 +6,11 @@ const filterRouter = express.Router();
 
 filterRouter.post('/find', async (req, res) => {
     try {
-        const { hospitalId, departmentId, doctorId, date, time } = req.body;
+        const { hospital, department, doctor, date, timeSlot } = req.body;
 
         const query = {};
 
-        if (doctorId) query.doctor = doctorId; // 🛠 correct field
+        if (doctor) query.doctor = doctor; // 🛠 correct field
         if (date) query.date = date;
         // time filtering will need special handling because slot has startTime, endTime separately
 
@@ -29,14 +29,14 @@ filterRouter.post('/find', async (req, res) => {
             });
 
         // Now manually filter by departmentId and hospitalId if provided
-        if (departmentId) {
-            slots = slots.filter(slot => slot.doctor?.dep_id?._id.toString() === departmentId);
+        if (department) {
+            slots = slots.filter(slot => slot.doctor?.dep_id?._id.toString() === department);
         }
-        if (hospitalId) {
-            slots = slots.filter(slot => slot.doctor?.dep_id?.hospital?._id.toString() === hospitalId);
+        if (hospital) {
+            slots = slots.filter(slot => slot.doctor?.dep_id?.hospital?._id.toString() === hospital);
         }
-        if (time) {
-            slots = slots.filter(slot => slot.startTime === time);
+        if (timeSlot) {
+            slots = slots.filter(slot => slot.startTime === timeSlot);
         }
         return res.status(200).json({ slots });
     } catch (error) {

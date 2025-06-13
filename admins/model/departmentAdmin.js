@@ -5,7 +5,9 @@ const departmentAdminSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   department: { type: mongoose.Schema.Types.ObjectId, ref: 'Department' },
-  role: { type: String, default: 'dep_admin' }
+  role: { type: String, default: 'Department Admin' }
 });
 
-module.exports = mongoose.model('DepartmentAdmin', departmentAdminSchema);
+const DepartmentAdmin = mongoose.model("DepartmentAdmin", departmentAdminSchema);
+
+module.exports = DepartmentAdmin;

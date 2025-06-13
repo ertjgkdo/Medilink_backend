@@ -1,8 +1,9 @@
 const express = require("express");
+const auth = require("../../authentication/middlewares/auth");
 const superAdminrouter = express.Router();
 const { createHospitalWithDepartments } = require("../controllers/superAdminController");
 
-// POST /api/superadmin/create-hospital-with-departments
-superAdminrouter.post("/create-hospital", createHospitalWithDepartments);
+
+superAdminrouter.post("/create-hospital",auth,  createHospitalWithDepartments);
 
 module.exports = superAdminrouter;

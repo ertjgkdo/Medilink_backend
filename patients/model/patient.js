@@ -8,6 +8,8 @@ const userSchema = mongoose.Schema({
     address: {type: String,required: false,},
     gender: {type: String,required: true,},
     bloodGroup: {type: String,required: true},
+    bloodGroupChangesCount: {type: Number, default: 0},
+    profilePicture: {type: String, required: false}, // Base64 encoded image string
     password:{type: String,required: true, minlength: 6, select: false},
     role:{type: String,enum: ["Patient", "Doctor", "admin"], default: "Patient"},
     opd_cards:[{ type: mongoose.Schema.Types.ObjectId, ref: "OPD_Card",}]
